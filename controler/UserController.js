@@ -1,5 +1,4 @@
 const User = require("../model/user");
-const { or } = require("sequelize");
 const multer = require('multer');
 
 const allUser = async (req, res) => {
@@ -37,12 +36,12 @@ const addUser = async (req, res) => {
         return res.status(500).send('An error occurred during file upload.');
       }
       const { name, email, contact, photoId } = req.body;
-      const { filename, mimetype } = photoId;
+      // const { filename, mimetype } = photoId;
       await User.create({
         Name: name,
         Email: email,
         Contact: contact,
-        Photo_Id: filename
+        Photo_Id: photoId
       });
       res.status(200).send("user added");
     });
