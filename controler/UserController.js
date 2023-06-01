@@ -50,58 +50,6 @@ const addUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
-  try {
-    const findUser = await User.findByPk(req.params.id);
-    if (!findUser) {
-      throw new Error("User not found");
-    }
-    let updatedInfo = {
-      ...req.body,
-      Updated_By: req.user.User_UNID,
-      Updated_At: new Date(),
-    };
-    const user = await User.update(updatedInfo, {
-      where: {
-        User_UNID: req.params.id,
-      },
-    });
-    res.status(200).json({ message: "User is updated!!!" });
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-};
-
-const getUserRoleID = async (req, res) => {
-  try {
-    const data = await User_Role.findOne({
-      where: {
-        User_Role: req.body.userRole,
-      }
-    });
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-}
-
-const deleteUser = async (req, res) => {
-  try {
-    const findUser = await User.findByPk(req.params.id);
-    if (!findUser) {
-      throw new Error("User not found");
-    }
-    await User.destroy({
-      where: {
-        User_UNID: req.params.id,
-      },
-    });
-    res.status(200).json({ message: "User is Deleted!!!" });
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-};
-
 module.exports = {
   allUser,
   addUser,

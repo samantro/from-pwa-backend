@@ -1,11 +1,11 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../database/connect');
 
-const User = sequelize.define("users", {
+const User = sequelize.define("Pet", {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: DataTypes.UUIDV4
     },
     Name: {
         type: DataTypes.STRING,
@@ -23,8 +23,9 @@ const User = sequelize.define("users", {
         type: DataTypes.BLOB('long')
     }
 },
-    {
-        timestamps: false,
-    });
+{
+    tableName: "pet",
+    timestamps: false,
+});
 
 module.exports = User;
