@@ -14,4 +14,4 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // routes
-app.use('/user', userRouter);
+app.use('/api/user', userRouter);

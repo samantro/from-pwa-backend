@@ -3,7 +3,9 @@ const multer = require('multer');
 
 const allUser = async (req, res) => {
   try {
-    const user = await User.findAll({});
+    const user = await User.findAll({
+        attributes: { exclude: ["Photo_Id"] }
+    });
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json(error);
@@ -50,7 +52,17 @@ const addUser = async (req, res) => {
   }
 };
 
+const deleteUser = async(req, res) => {
+    try {
+        await User.destroy({where: {}});
+        res.send('Deleted All');
+    } catch(e) {
+        res.send(e);
+    }
+}
+
 module.exports = {
   allUser,
   addUser,
+  deleteUser
 };
